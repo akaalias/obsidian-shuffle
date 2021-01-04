@@ -47,8 +47,7 @@ export default class ShufflePlugin extends Plugin {
 
 
 	async createShuffleNote() {
-		let result = "";
-		let template = this.settings.shuffleNoteTemplate;
+		let result = this.settings.shuffleNoteTemplate;
 
 		let variable1 = "$" + this.settings.variable1Name;
 		let values1 = this.settings.variable1Values.split("\n");
@@ -59,9 +58,9 @@ export default class ShufflePlugin extends Plugin {
 		let variable3 = "$" + this.settings.variable3Name;
 		let values3 = this.settings.variable3Values.split("\n");
 
-		result = this.replaceVariablesInTemplate(template, variable1, values1);
-		result = this.replaceVariablesInTemplate(result, variable2, values2);
-		result = this.replaceVariablesInTemplate(result, variable3, values3);
+		if(values1.length > 0) result = this.replaceVariablesInTemplate(result, variable1, values1);
+		if(values2.length > 0) result = this.replaceVariablesInTemplate(result, variable2, values2);
+		if(values3.length > 0) result = this.replaceVariablesInTemplate(result, variable3, values3);
 
 		const fileName = "Shuffle Note.md"
 
@@ -79,6 +78,7 @@ export default class ShufflePlugin extends Plugin {
 	async saveShuffleNote(filePath: string, mdString: string) {
 		const fileExists = await this.app.vault.adapter.exists(filePath);
 		if (fileExists) {
+			await this.app.vault.adapter.write(filePath, mdString);
 		} else {
 			await this.app.vault.create(filePath, mdString);
 		}
