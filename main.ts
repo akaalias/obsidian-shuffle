@@ -1,4 +1,6 @@
-import { App, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { App, Plugin, Notice, PluginSettingTab, Setting } from 'obsidian';
+
+const OBLIQUE_STRATEGIES = ["Abandon normal instruments.","Accept advice.","Accretion.","A line has two sides.","Balance the consistency principle with the inconsistency principle.","Be dirty.","Breathe more deeply.","Bridges -build -burn.","Cascades.","Cluster analysis.","Consider different fading systems.","Courage!","Cut a vital connection.","Decorate, decorate.","Define an area as 'safe' and use it as an anchor.","Destroy the most important thing.","Discard an axiom.","Disconnect from desire.","Discover the recipes you are using and abandon them.","Distorting time.","Don't be afraid of things because they're easy to do.","Don't be frightened of cliches.","Don't be frightened to display your talents.","Don't stress one thing more than another.","Do something boring.","Do the washing up.","Do the words need changing?","Do we need holes?","Emphasize differences.","Emphasize repetitions.","Emphasize the flaws.","Get your neck massaged.","Give way to your worst impulse.","Go slowly all the way round the outside.","Honor thy error as a hidden intention.","How would you have done it?","Humanize something free of error.","Infinitesimal gradations.","Into the impossible.","Is it finished?","Is there something missing?","Just carry on.","Left channel, right channel, centre channel.","Look at a very small object, look at its centre.","Look at the order in which you do things.","Look closely at the most embarrassing details and amplify them.","Make a blank valuable by putting it in an exquisite frame.","Make an exhaustive list of everything you might do and do the last thing on the list.","Make a sudden, destructive unpredictable action; incorporate.","Only one element of each kind.","Remember those quiet evenings.","Remove ambiguities and convert to specifics.","Remove specifics and convert to ambiguities.","Repetition is a form of change.","Reverse.","Simple subtraction.","Spectrum analysis.","Take a break.","Take away the elements in order of apparent non-importance.","Tidy up.","Turn it upside down.","Twist the spine.","Use an old idea.","Use an unacceptable color.","Water.","What are you really thinking about just now? Incorporate.","What is the reality of the situation?","What mistakes did you make last time?","What wouldn't you do?","Work at a different speed."]
 
 class ShufflePluginSettings {
 	variable1Name: string = "WORD";
@@ -111,12 +113,36 @@ class ShufflePluginSettingTab extends PluginSettingTab {
 		this.plugin = plugin;
 	}
 
+	async loadObliqueStrategies() {
+		this.plugin.settings.variable1Name = "OBLIQUE_STRATEGY";
+		this.plugin.settings.variable1Values = OBLIQUE_STRATEGIES.join("\n");
+		this.plugin.settings.variable2Name = "";
+		this.plugin.settings.variable2Values = "";
+		this.plugin.settings.variable3Name = "";
+		this.plugin.settings.variable3Values = "";
+		this.plugin.settings.shuffleNoteTemplate = "\"$OBLIQUE_STRATEGY\"";
+
+		await this.plugin.saveSettings();
+
+		this.display();
+
+		new Notice("Oblique Strategies loaded!");
+	}
+
 	display(): void {
 		let {containerEl} = this;
 
 		containerEl.empty();
 
 		containerEl.createEl('h2', {text: 'Shuffle Settings'});
+
+		containerEl.createEl("h3", {text: "Featured Prompts"});
+		containerEl.createEl("p", {text: "Try out new prompts by loading them into your settings. Will replace your custom prompts."});
+
+		containerEl.createEl("button", {text: "⚫️ Load \"Oblique Strategies\" by Brian Eno and Peter Schmidt"})
+			.addEventListener("mousedown", this.loadObliqueStrategies.bind(this));
+
+		containerEl.createEl("h3", {text: "Customize Your Prompts"});
 
 		new Setting(containerEl)
 			.setName('Variable #1 Name')
@@ -197,3 +223,4 @@ class ShufflePluginSettingTab extends PluginSettingTab {
 
 	}
 }
+
