@@ -1,9 +1,9 @@
 {
 	"id": "obsidian-shuffle",
 	"name": "Shuffle",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"minAppVersion": "0.9.12",
-	"description": "This plugin allows you to create randomized writing-prompts from lists of variables.",
+	"description": "This plugin allows you to create and load randomized writing-prompts from lists of variables.",
 	"author": "Alexis Rondeau",
 	"authorUrl": "https://publish.obsidian.md/alexisrondeau",
 	"isDesktopOnly": false
