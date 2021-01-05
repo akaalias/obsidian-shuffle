@@ -1,13 +1,13 @@
 import { App, Plugin, PluginSettingTab, Setting } from 'obsidian';
 
 class ShufflePluginSettings {
-	variable1Name: string;
-	variable1Values: string;
-	variable2Name: string;
-	variable2Values: string;
-	variable3Name: string;
-	variable3Values: string;
-	shuffleNoteTemplate: string;
+	variable1Name: string = "WORD";
+	variable1Values: string = "Cat\nDog\nKing\nFire\nPaper\nWall\nBook\nWind";
+	variable2Name: string = "LETTER";
+	variable2Values: string = "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl";
+	variable3Name: string = "LOCATION";
+	variable3Values: string = "New York\nLos Angeles\nLondon\nParis\nBerlin";
+	shuffleNoteTemplate: string = "## Prompt\n1. Include one of these words: $WORD, $WORD or $WORD\n2. Begin with a word that starts with `$LETTER`\n3. Take place in $LOCATION or $LOCATION\n";
 }
 
 export default class ShufflePlugin extends Plugin {
@@ -62,7 +62,7 @@ export default class ShufflePlugin extends Plugin {
 		if(values2.length > 0) result = this.replaceVariablesInTemplate(result, variable2, values2);
 		if(values3.length > 0) result = this.replaceVariablesInTemplate(result, variable3, values3);
 
-		const fileName = "Shuffle Note.md"
+		const fileName = `Shuffle Note - ${Date.now()} .md`;
 
 		await this.saveShuffleNote(fileName, result);
 		await this.app.workspace.openLinkText(fileName, '', true);
@@ -78,6 +78,7 @@ export default class ShufflePlugin extends Plugin {
 	async saveShuffleNote(filePath: string, mdString: string) {
 		const fileExists = await this.app.vault.adapter.exists(filePath);
 		if (fileExists) {
+			await this.app.vault.adapter.read(filePath);
 			await this.app.vault.adapter.write(filePath, mdString);
 		} else {
 			await this.app.vault.create(filePath, mdString);
