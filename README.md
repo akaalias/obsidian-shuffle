@@ -31,12 +31,13 @@ Based on Eleanor Konik's post at https://forum.obsidian.md/t/rfc-oblique-strateg
 - Hit the 'Dice' button in the sidebar to generate a new prompt note
 - Customize your variable names, values and template to your liking in the settings
 
-## Loading custom prompt packs
+## Load custom packs
+Try out new prompts by loading their pack into your settings. (Will replace your custom prompts.)
 
-I've included a loadable prompt pack for Oblique Strategies. To activate it...
+### Currently available packs:
+- ⚫ `Oblique Strategies` by Brian Eno and Peter Schmidt
+- ⚡️ `Flash Fiction Pack` by Eleanor Konik
 
-- Simply click on the "⚫️ Load `Oblique Strategies` by Brian Eno and Peter Schmidt" button in the settings.
+### Share YOUR custom prompts!
 
-## Share YOUR custom prompts!
-
-If you have created your own custom set of prompts, PLEASE SHARE them! Contact me via the Obsidian Forum or per issue in this repo. 
+If you have created your own custom set of prompts, PLEASE SHARE them! Contact me via the Obsidian Forum or per issue in this repo.  
