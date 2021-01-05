@@ -20,7 +20,7 @@ Based on Eleanor Konik's post at https://forum.obsidian.md/t/rfc-oblique-strateg
 3. Take place in London or Los Angeles
 ```
 ## How to to install manually
-- Download the latest main.js and mainfest.json from https://github.com/akaalias/obsidian-shuffle/releases/
+- Download the latest `main.js, mainfest.json and styles.css` from https://github.com/akaalias/obsidian-shuffle/releases/
 - Create a new folder named 'obsidian-shuffle'
 - Place the two files in the folder
 - Place the folder in your .obsidian/plugins directory
